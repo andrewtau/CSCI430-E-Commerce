@@ -1,0 +1,49 @@
+public class Test1 {
+    public static void main(String[] args) {
+        Facade businessSys = new Facade();
+        Product p1 = new Product("Bread", (float)0.59, 30);
+        Product p2 = new Product("Milk", (float)1.89, 25);
+        Product p3 = new Product("Beans", (float)1.00, 18);
+        Product p4 = new Product("Water 12-pk", (float)2.59, 26);
+        Product p5 = new Product("20 oz. Soft Drink", (float)1.99, 30);
+        Boolean clientAdded = businessSys.addClient(46.80);
+        System.out.println("Was client added? " + clientAdded);
+        businessSys.addClient(78.20);
+        businessSys.addClient(0.15);
+        String clientList = businessSys.retClientList();
+        System.out.println("Current client list:");
+        System.out.println(clientList);
+
+        businessSys.addSupplier("SupplierOne");
+        businessSys.addSupplier("SupplierTwo");
+        businessSys.addProductToSupplier(p1, "SupplierOne");
+        businessSys.addProductToSupplier(p2, "SupplierOne");
+        businessSys.addProductToSupplier(p4, "SupplierOne");
+        businessSys.addProductToSupplier(p1, "SupplierTwo");
+        businessSys.addProductToSupplier(p3, "SupplierTwo");
+        businessSys.addProductToSupplier(p5, "SupplierTow");
+        System.out.println(businessSys.listSuppliers());
+
+        System.out.println("Testing product set functions");
+        System.out.println("Current test product:");
+        System.out.println(p1.toString());
+        float newPrice = (float)12.99;
+        p1.setPrice(newPrice);
+        p1.setName("PC Mouse");
+        p1.setID(999999);
+        p1.addQuantity(2);
+        System.out.println("Modified test product:");
+        System.out.println(p1.toString());
+        System.out.println("\n" + businessSys.listSuppliers());
+        System.out.println("Notice that the product changes in the suppliers as well.");
+
+        System.out.println("\nTesting Product search function...");
+        System.out.println(businessSys.listSuppliersWithProduct(p1.getID()));
+
+        System.out.println("Testing Supplier List...\n");
+        System.out.println(businessSys.retSupplierList());
+
+
+        System.out.println("Completed");
+    }
+}
